@@ -11,13 +11,30 @@ var x = setInterval(function(){
     var minute = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
     var secon = Math.floor((distance % (1000*60)) / 1000);
 
-    document.getElementById("timecountDown").innerHTML = days + " Hari " + hour + " : "+ minute + " : "+secon; 
+    document.getElementById("Days").innerHTML = days;
+    document.getElementById("Hour").innerHTML = hour;     
+    document.getElementById("Minute").innerHTML = minute;     
+    document.getElementById("Secon").innerHTML = secon;     
+
     
     if(distance < 0)
     {
         clearInterval(x);
         document.getElementById("timecountDown").innerHTML = "Discount Expired";
+        
 
     }
 
 },1000);
+
+document.addEventListener('DOMContentLoaded', () =>
+  requestAnimationFrame(updateTime)
+)
+
+function updateTime() {
+  document.documentElement.style.setProperty('--timer-day', "'" + moment().format("dd") + "'");
+  document.documentElement.style.setProperty('--timer-hours', "'" + moment().format("k") + "'");
+  document.documentElement.style.setProperty('--timer-minutes', "'" + moment().format("mm") + "'");
+  document.documentElement.style.setProperty('--timer-seconds', "'" + moment().format("ss") + "'");
+  requestAnimationFrame(updateTime);
+}
