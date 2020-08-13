@@ -1,3 +1,15 @@
+$( document ).ready(function() {
+  //console.log( "ready!" );
+  $('#autoWidth').lightSlider({
+    autoWidth:true,
+    loop:true,
+    onSliderLoad: function() {
+        $('#autoWidth').removeClass('cS-hidden');
+    } 
+});  
+});
+
+
 var countdownDate = new Date("Aug 24,2020 15:37:25").getTime();
 
 var x = setInterval(function(){
@@ -27,14 +39,23 @@ var x = setInterval(function(){
 
 },1000);
 
-document.addEventListener('DOMContentLoaded', () =>
-  requestAnimationFrame(updateTime)
-)
-
-function updateTime() {
-  document.documentElement.style.setProperty('--timer-day', "'" + moment().format("dd") + "'");
-  document.documentElement.style.setProperty('--timer-hours', "'" + moment().format("k") + "'");
-  document.documentElement.style.setProperty('--timer-minutes', "'" + moment().format("mm") + "'");
-  document.documentElement.style.setProperty('--timer-seconds', "'" + moment().format("ss") + "'");
-  requestAnimationFrame(updateTime);
+window.addEventListener("scroll",function(){
+ var nav_ = document.querySelector("nav");
+ var three = document.getElementById("blok-image");
+ var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+// console.log(currentScroll);
+if(currentScroll >= 600)
+{
+  nav_.classList.toggle("sticky",window.scrollY);
+  three.classList.add("actived");
+  // $('.three-block .tagline').each(function(){
+  //   console.log("ok")
+  // });
 }
+else
+{
+  nav_.classList.remove("sticky");
+  // three.classList.remove("actived")
+}
+
+});
